@@ -1,0 +1,29 @@
+{
+  "name": "async-iterator-helpers-ponyfill",
+  "version": "0.1.0",
+  "description": "Ponyfill for AsyncIterator class compliant to 'proposal-async-iterator-helpers' proposal.",
+  "license": "MIT",
+  "author": "Leonardo Raele <leonardoraele@gmail.com>",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "node --test **/*.test.js",
+    "build": "tsc",
+    "prebuild": "rimraf dist",
+    "prepack": "npm run build",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "async",
+    "iterator",
+    "helpers",
+    "ponyfill"
+  ]
+}
