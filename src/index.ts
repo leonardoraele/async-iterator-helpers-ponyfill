@@ -5,16 +5,17 @@
  * 'Ponyfill' means this package exports a class that implements the proposal without modifying any global objects.
  */
 export class AsyncIterator<TYield> implements globalThis.AsyncIterator<TYield> {
-	static from<T, TReturn = any, TNext = any>(
-		source: Iterator<T, TReturn, TNext> | Iterable<T>
-			| globalThis.AsyncIterator<T, TReturn, TNext> | AsyncIterable<T, TReturn, TNext>
-	): AsyncIterator<T> {
+	static from<T>(
+		source: Iterator<T> | Iterable<T>
+			| Iterator<Promise<T>> | Iterable<Promise<T>>
+			| globalThis.AsyncIterator<T> | globalThis.AsyncIterable<T>
+	): AsyncIterator<Awaited<T>> {
 		return new AsyncIterator(
 			(
 				Symbol.iterator in source ? source[Symbol.iterator]()
 					: Symbol.asyncIterator in source ? source[Symbol.asyncIterator]()
 					: source
-			) as globalThis.AsyncIterator<T>
+			) as globalThis.AsyncIterator<Awaited<T>>
 		);
 	}
 
