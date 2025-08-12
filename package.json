@@ -1,6 +1,6 @@
 {
   "name": "async-iterator-helpers-ponyfill",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ponyfill for AsyncIterator class compliant to 'proposal-async-iterator-helpers' proposal.",
   "license": "MIT",
   "author": "Leonardo Raele <leonardoraele@gmail.com>",
