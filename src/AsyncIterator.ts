@@ -308,17 +308,4 @@ export class AsyncIterator<T, TReturn = any, TNext = any>
 		}
 		return array;
 	}
-
-	toStream(): ReadableStream<T> {
-		return new ReadableStream({
-			pull: async controller => {
-				const { value, done } = await this.next();
-				if (done) {
-					controller.close();
-				} else {
-					controller.enqueue(value);
-				}
-			},
-		});
-	}
 }
