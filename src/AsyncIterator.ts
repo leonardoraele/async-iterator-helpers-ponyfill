@@ -168,12 +168,14 @@ export class AsyncIterator<T, TReturn = any, TNext = any>
 	 */
 	flatMap<TNew>(
 		mapper: (value: T) => Iterable<TNew> | Iterator<TNew>
+			| Promise<Iterable<TNew>> | Promise<Iterator<TNew>>
 			| Iterable<Promise<TNew>> | Iterator<Promise<TNew>>
+			| Promise<Iterable<Promise<TNew>>> | Promise<Iterator<Promise<TNew>>>
 			| AsyncIterable<TNew> | AsyncIterator<TNew>,
 	): AsyncIterator<TNew> {
 		return new AsyncIterator((async function* (this: AsyncIterator<T, TReturn, TNext>) {
 			for await (const many of this) {
-				for await (const single of AsyncIterator.from(mapper(many))) {
+				for await (const single of AsyncIterator.from(await mapper(many))) {
 					yield single;
 				}
 			}

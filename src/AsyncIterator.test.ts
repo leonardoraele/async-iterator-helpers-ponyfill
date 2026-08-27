@@ -146,9 +146,13 @@ describe(AsyncIterator.name, () => {
 			await expect(AsyncIterator.from([1, 2, 3]).flatMap(i => [i, i * 10]).toArray()).resolves.toEqual([1, 10, 2, 20, 3, 30]);
 			await expect(AsyncIterator.from([1, 2, 3]).flatMap(() => []).toArray()).resolves.toEqual([]);
 		});
-		it.skip('works with asynchronous mapping functions', async () => {
+		it('works with asynchronous mapping functions', async () => {
 			await expect(AsyncIterator.from([1, 2, 3]).flatMap(async i => [i, i * 10]).toArray()).resolves.toEqual([1, 10, 2, 20, 3, 30]);
 			await expect(AsyncIterator.from([1, 2, 3]).flatMap(async () => []).toArray()).resolves.toEqual([]);
+		});
+		it('works with another async iterator', async () => {
+			await expect(AsyncIterator.from([1, 2, 3]).flatMap(i => AsyncIterator.from([i, i * 10])).toArray()).resolves.toEqual([1, 10, 2, 20, 3, 30]);
+			await expect(AsyncIterator.from([1, 2, 3]).flatMap(() => AsyncIterator.from([])).toArray()).resolves.toEqual([]);
 		});
 	});
 
