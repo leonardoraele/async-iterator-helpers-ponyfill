@@ -36,7 +36,7 @@ export class AsyncIterator<T, TReturn = any, TNext = any>
 		}());
 	}
 
-	private constructor(
+	constructor(
 		private source: globalThis.AsyncIterator<T>,
 	) {}
 
